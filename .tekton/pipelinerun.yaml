@@ -26,8 +26,6 @@ metadata:
 
     # How many runs we want to keep.
     pipelinesascode.tekton.dev/max-keep-runs: "5"
-    pipelinesascode.tekton.dev/on-cel-expression: |
-        "*.md".pathChanged()
 spec:
   params:
     # The variable with brackets are special to Pipelines as Code
@@ -47,6 +45,7 @@ spec:
       - name: fetch-repository
         taskRef:
           name: git-clone
+          kind: ClusterTask
         workspaces:
           - name: output
             workspace: source
